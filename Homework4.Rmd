@@ -185,19 +185,23 @@ knitr::kable(SouthAmericanCapitals)
 ```
 
 ```{r}
-full_join(SouthAmericanCapitals, Americas)
+FullJoin <- full_join(SouthAmericanCapitals, Americas)
+knitr::kable(FullJoin)
 ```
 
 ```{r}
-left_join(SouthAmericanCapitals, Americas)
+LeftJoin <- left_join(SouthAmericanCapitals, Americas)
+knitr::kable(LeftJoin)
 ```
 
 ```{r}
-inner_join(SouthAmericanCapitals, Americas)
+InnerJoin <- inner_join(SouthAmericanCapitals, Americas)
+knitr::kable(InnerJoin)
 ```
 
 ```{r}
-semi_join(SouthAmericanCapitals, Americas)
+SemiJoin <- semi_join(SouthAmericanCapitals, Americas)
+knitr::kable(SemiJoin)
 ```
 
-In this case `semi_join` is the only function that yields a different table.
+In this case `semi_join` is the only function that yields a completely different table, whereas `full_join` merges all data and includes empty spaces.

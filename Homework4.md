@@ -374,111 +374,74 @@ knitr::kable(SouthAmericanCapitals)
 | Venezuela | Caracas       |
 
 ``` r
-full_join(SouthAmericanCapitals, Americas)
+FullJoin <- full_join(SouthAmericanCapitals, Americas)
 ```
 
     ## Joining, by = "country"
 
     ## Warning: Column `country` joining factors with different levels, coercing
     ## to character vector
-
-    ##                country Capital_City continent year lifeExp       pop
-    ## 1            Argentina Buenos Aires  Americas 1997  73.275  36203463
-    ## 2              Bolivia       La Paz  Americas 1997  62.050   7693188
-    ## 3               Brazil     Brasilia  Americas 1997  69.388 168546719
-    ## 4                Chile     Santiago  Americas 1997  75.816  14599929
-    ## 5             Colombia       Bogota  Americas 1997  70.313  37657830
-    ## 6              Ecuador        Quito  Americas 1997  72.312  11911819
-    ## 7             Paraguay     Asuncion  Americas 1997  69.400   5154123
-    ## 8                 Peru         Lima  Americas 1997  68.386  24748122
-    ## 9              Uruguay   Montevideo  Americas 1997  74.223   3262838
-    ## 10           Venezuela      Caracas  Americas 1997  72.146  22374398
-    ## 11              Canada         <NA>  Americas 1997  78.610  30305843
-    ## 12          Costa Rica         <NA>  Americas 1997  77.260   3518107
-    ## 13                Cuba         <NA>  Americas 1997  76.151  10983007
-    ## 14  Dominican Republic         <NA>  Americas 1997  69.957   7992357
-    ## 15         El Salvador         <NA>  Americas 1997  69.535   5783439
-    ## 16           Guatemala         <NA>  Americas 1997  66.322   9803875
-    ## 17               Haiti         <NA>  Americas 1997  56.671   6913545
-    ## 18            Honduras         <NA>  Americas 1997  67.659   5867957
-    ## 19             Jamaica         <NA>  Americas 1997  72.262   2531311
-    ## 20              Mexico         <NA>  Americas 1997  73.670  95895146
-    ## 21           Nicaragua         <NA>  Americas 1997  68.426   4609572
-    ## 22              Panama         <NA>  Americas 1997  73.738   2734531
-    ## 23         Puerto Rico         <NA>  Americas 1997  74.917   3759430
-    ## 24 Trinidad and Tobago         <NA>  Americas 1997  69.465   1138101
-    ## 25       United States         <NA>  Americas 1997  76.810 272911760
-    ##    gdpPercap
-    ## 1  10967.282
-    ## 2   3326.143
-    ## 3   7957.981
-    ## 4  10118.053
-    ## 5   6117.362
-    ## 6   7429.456
-    ## 7   4247.400
-    ## 8   5838.348
-    ## 9   9230.241
-    ## 10 10165.495
-    ## 11 28954.926
-    ## 12  6677.045
-    ## 13  5431.990
-    ## 14  3614.101
-    ## 15  5154.825
-    ## 16  4684.314
-    ## 17  1341.727
-    ## 18  3160.455
-    ## 19  7121.925
-    ## 20  9767.298
-    ## 21  2253.023
-    ## 22  7113.692
-    ## 23 16999.433
-    ## 24  8792.573
-    ## 25 35767.433
 
 ``` r
-left_join(SouthAmericanCapitals, Americas)
+knitr::kable(FullJoin)
 ```
 
-    ## Joining, by = "country"
-
-    ## Warning: Column `country` joining factors with different levels, coercing
-    ## to character vector
-
-    ##      country Capital_City continent year lifeExp       pop gdpPercap
-    ## 1  Argentina Buenos Aires  Americas 1997  73.275  36203463 10967.282
-    ## 2    Bolivia       La Paz  Americas 1997  62.050   7693188  3326.143
-    ## 3     Brazil     Brasilia  Americas 1997  69.388 168546719  7957.981
-    ## 4      Chile     Santiago  Americas 1997  75.816  14599929 10118.053
-    ## 5   Colombia       Bogota  Americas 1997  70.313  37657830  6117.362
-    ## 6    Ecuador        Quito  Americas 1997  72.312  11911819  7429.456
-    ## 7   Paraguay     Asuncion  Americas 1997  69.400   5154123  4247.400
-    ## 8       Peru         Lima  Americas 1997  68.386  24748122  5838.348
-    ## 9    Uruguay   Montevideo  Americas 1997  74.223   3262838  9230.241
-    ## 10 Venezuela      Caracas  Americas 1997  72.146  22374398 10165.495
+| country             | Capital\_City | continent |  year|  lifeExp|        pop|  gdpPercap|
+|:--------------------|:--------------|:----------|-----:|--------:|----------:|----------:|
+| Argentina           | Buenos Aires  | Americas  |  1997|   73.275|   36203463|  10967.282|
+| Bolivia             | La Paz        | Americas  |  1997|   62.050|    7693188|   3326.143|
+| Brazil              | Brasilia      | Americas  |  1997|   69.388|  168546719|   7957.981|
+| Chile               | Santiago      | Americas  |  1997|   75.816|   14599929|  10118.053|
+| Colombia            | Bogota        | Americas  |  1997|   70.313|   37657830|   6117.362|
+| Ecuador             | Quito         | Americas  |  1997|   72.312|   11911819|   7429.456|
+| Paraguay            | Asuncion      | Americas  |  1997|   69.400|    5154123|   4247.400|
+| Peru                | Lima          | Americas  |  1997|   68.386|   24748122|   5838.348|
+| Uruguay             | Montevideo    | Americas  |  1997|   74.223|    3262838|   9230.241|
+| Venezuela           | Caracas       | Americas  |  1997|   72.146|   22374398|  10165.495|
+| Canada              | NA            | Americas  |  1997|   78.610|   30305843|  28954.926|
+| Costa Rica          | NA            | Americas  |  1997|   77.260|    3518107|   6677.045|
+| Cuba                | NA            | Americas  |  1997|   76.151|   10983007|   5431.990|
+| Dominican Republic  | NA            | Americas  |  1997|   69.957|    7992357|   3614.101|
+| El Salvador         | NA            | Americas  |  1997|   69.535|    5783439|   5154.825|
+| Guatemala           | NA            | Americas  |  1997|   66.322|    9803875|   4684.314|
+| Haiti               | NA            | Americas  |  1997|   56.671|    6913545|   1341.727|
+| Honduras            | NA            | Americas  |  1997|   67.659|    5867957|   3160.455|
+| Jamaica             | NA            | Americas  |  1997|   72.262|    2531311|   7121.925|
+| Mexico              | NA            | Americas  |  1997|   73.670|   95895146|   9767.298|
+| Nicaragua           | NA            | Americas  |  1997|   68.426|    4609572|   2253.023|
+| Panama              | NA            | Americas  |  1997|   73.738|    2734531|   7113.692|
+| Puerto Rico         | NA            | Americas  |  1997|   74.917|    3759430|  16999.433|
+| Trinidad and Tobago | NA            | Americas  |  1997|   69.465|    1138101|   8792.573|
+| United States       | NA            | Americas  |  1997|   76.810|  272911760|  35767.433|
 
 ``` r
-inner_join(SouthAmericanCapitals, Americas)
+LeftJoin <- left_join(SouthAmericanCapitals, Americas)
 ```
 
     ## Joining, by = "country"
 
     ## Warning: Column `country` joining factors with different levels, coercing
     ## to character vector
-
-    ##      country Capital_City continent year lifeExp       pop gdpPercap
-    ## 1  Argentina Buenos Aires  Americas 1997  73.275  36203463 10967.282
-    ## 2    Bolivia       La Paz  Americas 1997  62.050   7693188  3326.143
-    ## 3     Brazil     Brasilia  Americas 1997  69.388 168546719  7957.981
-    ## 4      Chile     Santiago  Americas 1997  75.816  14599929 10118.053
-    ## 5   Colombia       Bogota  Americas 1997  70.313  37657830  6117.362
-    ## 6    Ecuador        Quito  Americas 1997  72.312  11911819  7429.456
-    ## 7   Paraguay     Asuncion  Americas 1997  69.400   5154123  4247.400
-    ## 8       Peru         Lima  Americas 1997  68.386  24748122  5838.348
-    ## 9    Uruguay   Montevideo  Americas 1997  74.223   3262838  9230.241
-    ## 10 Venezuela      Caracas  Americas 1997  72.146  22374398 10165.495
 
 ``` r
-semi_join(SouthAmericanCapitals, Americas)
+knitr::kable(LeftJoin)
+```
+
+| country   | Capital\_City | continent |  year|  lifeExp|        pop|  gdpPercap|
+|:----------|:--------------|:----------|-----:|--------:|----------:|----------:|
+| Argentina | Buenos Aires  | Americas  |  1997|   73.275|   36203463|  10967.282|
+| Bolivia   | La Paz        | Americas  |  1997|   62.050|    7693188|   3326.143|
+| Brazil    | Brasilia      | Americas  |  1997|   69.388|  168546719|   7957.981|
+| Chile     | Santiago      | Americas  |  1997|   75.816|   14599929|  10118.053|
+| Colombia  | Bogota        | Americas  |  1997|   70.313|   37657830|   6117.362|
+| Ecuador   | Quito         | Americas  |  1997|   72.312|   11911819|   7429.456|
+| Paraguay  | Asuncion      | Americas  |  1997|   69.400|    5154123|   4247.400|
+| Peru      | Lima          | Americas  |  1997|   68.386|   24748122|   5838.348|
+| Uruguay   | Montevideo    | Americas  |  1997|   74.223|    3262838|   9230.241|
+| Venezuela | Caracas       | Americas  |  1997|   72.146|   22374398|  10165.495|
+
+``` r
+InnerJoin <- inner_join(SouthAmericanCapitals, Americas)
 ```
 
     ## Joining, by = "country"
@@ -486,16 +449,47 @@ semi_join(SouthAmericanCapitals, Americas)
     ## Warning: Column `country` joining factors with different levels, coercing
     ## to character vector
 
-    ##      country Capital_City
-    ## 1  Argentina Buenos Aires
-    ## 2    Bolivia       La Paz
-    ## 3     Brazil     Brasilia
-    ## 4      Chile     Santiago
-    ## 5   Colombia       Bogota
-    ## 6    Ecuador        Quito
-    ## 7   Paraguay     Asuncion
-    ## 8       Peru         Lima
-    ## 9    Uruguay   Montevideo
-    ## 10 Venezuela      Caracas
+``` r
+knitr::kable(InnerJoin)
+```
 
-In this case `semi_join` is the only function that yields a different table.
+| country   | Capital\_City | continent |  year|  lifeExp|        pop|  gdpPercap|
+|:----------|:--------------|:----------|-----:|--------:|----------:|----------:|
+| Argentina | Buenos Aires  | Americas  |  1997|   73.275|   36203463|  10967.282|
+| Bolivia   | La Paz        | Americas  |  1997|   62.050|    7693188|   3326.143|
+| Brazil    | Brasilia      | Americas  |  1997|   69.388|  168546719|   7957.981|
+| Chile     | Santiago      | Americas  |  1997|   75.816|   14599929|  10118.053|
+| Colombia  | Bogota        | Americas  |  1997|   70.313|   37657830|   6117.362|
+| Ecuador   | Quito         | Americas  |  1997|   72.312|   11911819|   7429.456|
+| Paraguay  | Asuncion      | Americas  |  1997|   69.400|    5154123|   4247.400|
+| Peru      | Lima          | Americas  |  1997|   68.386|   24748122|   5838.348|
+| Uruguay   | Montevideo    | Americas  |  1997|   74.223|    3262838|   9230.241|
+| Venezuela | Caracas       | Americas  |  1997|   72.146|   22374398|  10165.495|
+
+``` r
+SemiJoin <- semi_join(SouthAmericanCapitals, Americas)
+```
+
+    ## Joining, by = "country"
+
+    ## Warning: Column `country` joining factors with different levels, coercing
+    ## to character vector
+
+``` r
+knitr::kable(SemiJoin)
+```
+
+| country   | Capital\_City |
+|:----------|:--------------|
+| Argentina | Buenos Aires  |
+| Bolivia   | La Paz        |
+| Brazil    | Brasilia      |
+| Chile     | Santiago      |
+| Colombia  | Bogota        |
+| Ecuador   | Quito         |
+| Paraguay  | Asuncion      |
+| Peru      | Lima          |
+| Uruguay   | Montevideo    |
+| Venezuela | Caracas       |
+
+In this case `semi_join` is the only function that yields a completely different table, whereas `full_join` merges all data and includes empty spaces.

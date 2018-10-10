@@ -164,3 +164,40 @@ gapminder %>%  group_by(continent, year) %>% summarize(minLife = min(lifeExp)) %
 ```
 
 This revealed unexpected trends for Asia and Africa. In the early 1990s Africa experienced a strong dip in its minimum life expectancy - maybe linked to the Rwandan genocide.
+
+# Join - South American cities
+
+First lets explore the countries within the Americas countries within *Gapminder*, so that the extracted South American country names match those in the data set.
+
+```{r}
+Americas <- gapminder %>%
+   filter(continent %in% c("Americas"), year == 1997)
+knitr::kable(Americas)
+```
+
+Next, lets list the countries of South America and their respective capital cities.
+
+```{r}
+country <- c("Argentina", "Bolivia", "Brazil", "Chile", "Colombia", "Ecuador", "Paraguay", "Peru", "Uruguay", "Venezuela")
+Capital_City <- c("Buenos Aires", "La Paz", "Brasilia", "Santiago", "Bogota", "Quito", "Asuncion", "Lima", "Montevideo", "Caracas")
+SouthAmericanCapitals <- data.frame(country, Capital_City)
+knitr::kable(SouthAmericanCapitals)
+```
+
+```{r}
+full_join(SouthAmericanCapitals, Americas)
+```
+
+```{r}
+left_join(SouthAmericanCapitals, Americas)
+```
+
+```{r}
+inner_join(SouthAmericanCapitals, Americas)
+```
+
+```{r}
+semi_join(SouthAmericanCapitals, Americas)
+```
+
+In this case `semi_join` is the only function that yields a different table.

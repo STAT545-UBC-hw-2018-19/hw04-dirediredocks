@@ -1,0 +1,166 @@
+---
+title: "Homework4"
+output: github_document
+---
+
+As usual, the first task is to load the packages.
+
+```{r}
+library(gapminder)
+library(tidyverse)
+library(dplyr)
+library(igraph)
+```
+
+# Activity #2 - Exploring Chile's neighbours
+
+Task: "*Make a tibble with one row per year and columns for life expectancy for two or more countries. Use `knitr::kable()` to make this table look pretty in your rendered homework. Take advantage of this new data shape to scatterplot life expectancy for one country against that of another."*
+
+
+
+```{r}
+ChileAndFriends <- gapminder %>%
+  filter(country %in% c("Chile","Argentina", "Peru", "Bolivia")) %>%
+  select(year, country, lifeExp) %>%
+  spread(country,lifeExp) %>%
+  rename(Year = year)
+knitr::kable(ChileAndFriends)
+```
+
+After carefully crafting the code of a single plot, the script can be copied and edited with the corresponding country. This yields three comparative plots of Chile versus its neighbours.
+
+```{r}
+ChilevArgentina <- ChileAndFriends %>%
+  ggplot(aes(Chile, Argentina, color=factor(Year))) +
+  geom_point() +
+  xlim(30,90) +
+  ylim(30,90) +
+  coord_fixed() +
+  geom_abline(intercept = 0, linetype="dashed", slope = 1) +
+    theme(plot.subtitle = element_text(vjust = 1), 
+    plot.caption = element_text(vjust = 1), 
+    axis.line = element_line(size = 0.4, 
+    linetype = "solid"), axis.ticks = element_line(size = 0.4), 
+    axis.title = element_text(family = "mono"), 
+    axis.text = element_text(family = "mono"), 
+    axis.text.x = element_text(family = "mono"), 
+    axis.text.y = element_text(family = "mono"), 
+    plot.title = element_text(family = "mono"),
+    panel.background = element_rect(fill = NA)) +
+    labs(colour = "Year") +
+    theme(legend.text = element_text(family = "mono"), 
+    legend.title = element_text(family = "mono"))
+
+ChilevBolivia <- ChileAndFriends %>%
+  ggplot(aes(Chile, Bolivia, color=factor(Year))) +
+  geom_point() +
+  xlim(30,90) +
+  ylim(30,90) +
+  coord_fixed() +
+  geom_abline(intercept = 0, linetype="dashed", slope = 1) +
+    theme(plot.subtitle = element_text(vjust = 1), 
+    plot.caption = element_text(vjust = 1), 
+    axis.line = element_line(size = 0.4, 
+    linetype = "solid"), axis.ticks = element_line(size = 0.4), 
+    axis.title = element_text(family = "mono"), 
+    axis.text = element_text(family = "mono"), 
+    axis.text.x = element_text(family = "mono"), 
+    axis.text.y = element_text(family = "mono"), 
+    plot.title = element_text(family = "mono"),
+    panel.background = element_rect(fill = NA)) +
+    labs(colour = "Year") +
+    theme(legend.text = element_text(family = "mono"), 
+    legend.title = element_text(family = "mono"))
+
+ChilevPeru <- ChileAndFriends %>%
+  ggplot(aes(Chile, Peru, color=factor(Year))) +
+  geom_point() +
+  xlim(30,90) +
+  ylim(30,90) +
+  coord_fixed() +
+  geom_abline(intercept = 0, linetype="dashed", slope = 1) +
+    theme(plot.subtitle = element_text(vjust = 1), 
+    plot.caption = element_text(vjust = 1), 
+    axis.line = element_line(size = 0.4, 
+    linetype = "solid"), axis.ticks = element_line(size = 0.4), 
+    axis.title = element_text(family = "mono"), 
+    axis.text = element_text(family = "mono"), 
+    axis.text.x = element_text(family = "mono"), 
+    axis.text.y = element_text(family = "mono"), 
+    plot.title = element_text(family = "mono"),
+    panel.background = element_rect(fill = NA)) +
+    labs(colour = "Year") +
+    theme(legend.text = element_text(family = "mono"), 
+    legend.title = element_text(family = "mono"))
+```
+
+For Chile and Argentina
+
+```{r}
+ChilevArgentina
+```
+
+For Chile and Bolivia
+
+```{r}
+ChilevBolivia
+```
+
+For Chile and Peru
+
+```{r}
+ChilevPeru
+```
+
+# Activity #3 - Long and wide format `lifeExp`
+
+Task: *"Compute some measure of life expectancy (mean? median? **min?** max?) for all possible combinations of continent and year. Reshape that to have one row per year and one variable for each continent. Or the other way around: one row per continent and one variable per year. Use `knitr::kable()` to make these tables look pretty in your rendered homework.Is there a plot that is easier to make with the data in this shape versis the usual form?"*
+
+I wonder how the *minimum* value of life expectancy has changed over the years. This is often overlooked, granted that it is the maximum life expectancy that gets the spotlight. First, lets look at the "tidy-format" version of this data, where each row is a single measurement. For extra tidyness, the default names of 'year' and 'continent' are renamed to be capitalized from now onwards.
+
+```{r}
+lifeExpMin <- gapminder %>%
+  group_by(continent, year) %>%
+  summarize("Minimum Life Expectancy" = min(lifeExp)) %>%
+  rename(Continent = continent, Year = year)
+knitr::kable(lifeExpMin)
+```
+
+The years in *Gapminder* range from 1952 to 2007 in intervals of 5 years, which means that per continent there are 12 unique year measurements. This can be represented in a "wide-format" table that shows the minimum `lifeExp` per continent over years. Wide-format is also known as "human eye" ready, because its compact and easy to read.
+
+```{r}
+YearSort <- lifeExpMin %>%
+  spread(key = Continent, value= "Minimum Life Expectancy")
+knitr::kable(YearSort)
+```
+
+Conversely, the same data can be shown as the counterpart "wide-format" table, where rows are continets and columns are years. The same code is used, the only change is in the `spread` 'key' variable, from *continent* to *year*. 
+This conversion is useful for organizing data in different spaces - its the same data, but it can fit different spaces, which is useful for presentations and communicating data.
+
+```{r}
+YearSort <- lifeExpMin %>%
+  spread(key = Year, value= "Minimum Life Expectancy")
+knitr::kable(YearSort)
+```
+
+Minimum life expectancy can be plotted to visually explore trends over time.
+
+```{r}
+gapminder %>%  group_by(continent, year) %>% summarize(minLife = min(lifeExp)) %>%
+  ggplot(aes(y = minLife, x = year, color = continent)) + geom_line() + theme(plot.subtitle = element_text(vjust = 1), 
+    plot.caption = element_text(vjust = 1), 
+    axis.line = element_line(size = 0.3, 
+    linetype = "solid"), axis.ticks = element_line(size = 0.3), 
+    axis.title = element_text(family = "mono"), 
+    axis.text = element_text(family = "mono"), 
+    axis.text.x = element_text(family = "mono"), 
+    axis.text.y = element_text(family = "mono"), 
+    plot.title = element_text(family = "mono"), 
+    legend.text = element_text(family = "mono"), 
+    legend.title = element_text(family = "mono"), 
+    panel.background = element_rect(fill = NA)) + 
+    labs(x = "Year", y = "Minimum Life Expectancy") +
+    labs(title = NULL, colour = NULL)
+```
+
+This revealed unexpected trends for Asia and Africa. In the early 1990s Africa experienced a strong dip in its minimum life expectancy - maybe linked to the Rwandan genocide.
